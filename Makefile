@@ -5,13 +5,13 @@
 CC = gcc
 FLAGS = -Wall -Wextra -std=c11
 
-build: freq hash hll
+build: freq hash
 
 freq: freq.c
 	$(CC) $(FLAGS) -o $@ $<
 
-hll: hll.c
-	$(CC) $(FLAGS) -o $@ $(LIBS) $<
+#hll: hll.c
+#	$(CC) $(FLAGS) -o $@ $(LIBS) $<
 
 hash: hash.c
 	$(CC) $(FLAGS) -o $@  $<
@@ -19,4 +19,4 @@ hash: hash.c
 clean:
 	rm freq
 	rm hash
-	rm hll
+#	rm hll
