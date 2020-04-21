@@ -1,0 +1,71 @@
+===============================================================================
+Tema 2 SD - Count Distinct
+Nume: Minea Radu-Stefan
+Seria: CA
+Grupa: 314CA
+===============================================================================
+Timpul petrecut pe tema: ~ 3 zile
+===============================================================================
+Descrierea proiectului
+
+> Tema exploreaza diferite metode de a afla cardinalitatea unei multimi,
+optimizand treptat atat memoria utilizata.
+===============================================================================
+Rulare
+
+* freq & hash
+> Input de la tastatura, output la ecran
+
+* hll
+> User-ul creeaza un fisier <input.in> unde isi va trece multimea de numere a
+carei cardinaltate vrea sa o afle
+> Terminal: 
+	- make
+	- ./hll <input.in>
+===============================================================================
+Structura proiectului
+
+* Makefile
+> Include regulile build si clean
+
+* freq.c
+> Implementat cu ajutorul unui vector de frecventa
+
+* hash.c
+> Introducerea string-urilor in hashtable - put():
+	+ Am facut la inceput de tot linear probing, pentru ca apoi sa judec
+	linistit daca string-ul reprezinta un nou entry sau doar trebuie sa-i
+	updatez contorul
+		- Parcurgeam vectorul de "struct info" incepand de la pozitia
+		hash-ului initial pana cand:
+			a) Se gaseste un bucket gol SAU
+			b) Cheia din bucket corespunde cu cea ce trebuie
+			introdusa in hashtable
+
+* hll.c
+> Implementat conform instructiunilor din cerinta, simuland un hashtable
+(am folosit doar functia de hash; nu am creat bucket-uri propriu-zise)
+> Aflarea numarului de zero-uri - find_initial_zeros():
+	+ Shiftam bit cu bit la dreapta
+	+ Daca numarul shiftat era par, inseamna ca am gasit un nou 0 in
+	secventa de biti
+===============================================================================
+Limitari
+
+* hash.c
+> Incarc memoria cu tot input-ul din fisier prin variabila temp[] ce retine
+toate string-urile
+	+ Incercasem sa zic fseek(stdin, 0, SEEK_SET), dar la momentul
+	respectiv nu a mers, asa ca am cautat alta solutie
+	+ Desi dupa citirea input-ului memoria e complet incarcata, dau free
+	fiecarui string in parte odata ce il introduc in hashtable
+> Implementarea nu este complet generica (de exemplu, buckets sunt de tip
+"info *" in loc de "void *"
+===============================================================================
+Feedback
+
+> A fost o tema placuta, insa care initial ma speriase pentru ca vazusem
+formule matematice in enunt.
+
+> A fost interesant sa vad cum se pot gasi solutii aproximative la probleme
+care altminteri ar necesita multa memorie.

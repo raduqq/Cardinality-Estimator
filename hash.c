@@ -50,8 +50,10 @@ int main() {
       exit(ERROR_STATUS);
     }
 
+    // Allocating one extra byte, otherwise snprintf would exclude the last
+    // character of the string
     temp[cnt] = malloc(sizeof(buffer) + 1);
-    strcpy(temp[cnt], buffer);
+    snprintf(temp[cnt], sizeof(buffer) + 1, "%s", buffer);
     cnt++;
   }
 
@@ -108,7 +110,7 @@ unsigned int hash_function_string(void *a) {
    * Credits: http://www.cse.yorku.ca/~oz/hash.html
    */
   unsigned char *puchar_a = (unsigned char *)a;
-  unsigned long hash = 5381;
+  unsigned int hash = 5381;
   int c;
 
   while ((c = *puchar_a++))
@@ -140,7 +142,7 @@ void put(struct Hashtable *ht, void *key, int key_size_bytes) {
 
   // NEW STRING => initializing count
   inside_data->key = malloc(key_size_bytes + 1);
-  strcpy(inside_data->key, key);
+  snprintf(inside_data->key, key_size_bytes + 1, "%s", (char *)key);
   inside_data->value = NEW_STRING_CNT;
 }
 
