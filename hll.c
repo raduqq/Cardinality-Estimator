@@ -1,3 +1,5 @@
+// Copyright 2020 Radu-Stefan Minea 314CA
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -14,7 +16,7 @@ typedef struct Hashtable {
 void file_check(FILE *f);
 void init_ht(Hashtable *ht, int hmax, unsigned int (*hash_function)(void *));
 void mem_check(void *p);
-int max(int a, int b);
+int my_max(int a, int b);
 unsigned int hash_function_int(void *a);
 int find_initial_zeros(int x, int no_bits_total, int no_bucket_bits);
 
@@ -53,7 +55,7 @@ int main(int argc, char **argv) {
 
     bucket_no = hash >> (no_bits_total - BUCKET_BITS);
     zeros_cnt = find_initial_zeros(hash, no_bits_total, BUCKET_BITS);
-    M[bucket_no] = max(M[bucket_no], zeros_cnt);
+    M[bucket_no] = my_max(M[bucket_no], zeros_cnt);
   }
 
   // 3) Aggregating values
@@ -106,7 +108,7 @@ void mem_check(void *p) {
   }
 }
 
-int max(int a, int b) {
+int my_max(int a, int b) {
   if (a > b) {
     return a;
   }
